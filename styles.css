@@ -1,0 +1,1289 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --deep-plum: #2d1b3d;
+    --midnight-blue: #1a1a3e;
+    --soft-lavender: #c4b5d8;
+    --pearl-white: #f8f6f9;
+    --chrome: #e0e0e8;
+    --accent-glow: rgba(196, 181, 216, 0.3);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--pearl-white);
+    background: var(--deep-plum);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* 3D Canvas Background */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Navigation */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(26, 26, 62, 0.2);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(224, 224, 232, 0.1);
+}
+
+.nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: var(--pearl-white);
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-links a {
+    color: var(--chrome);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 300;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--soft-lavender);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--soft-lavender);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Section Base */
+.section {
+    min-height: 100vh;
+    position: relative;
+    padding: 8rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Typography */
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    color: var(--pearl-white);
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--soft-lavender);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 200;
+    text-align: center;
+}
+
+/* Intro Scene */
+.intro-scene {
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.intro-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.logo-reveal {
+    opacity: 0;
+    animation: fadeInUp 1.5s ease forwards;
+}
+
+.brand-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7rem;
+    font-weight: 300;
+    letter-spacing: 8px;
+    color: var(--pearl-white);
+    margin-bottom: 1rem;
+}
+
+.brand-subtitle {
+    font-size: 1.3rem;
+    letter-spacing: 4px;
+    color: var(--soft-lavender);
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+.brand-location {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: var(--chrome);
+    font-weight: 200;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.5s forwards;
+}
+
+.intro-shape {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(196, 181, 216, 0.15), transparent 70%);
+    border-radius: 50%;
+    animation: pulseGlow 8s ease-in-out infinite;
+    z-index: 1;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 2s forwards;
+}
+
+.scroll-indicator span {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--chrome);
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--soft-lavender), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* Glass Card */
+.glass-card {
+    background: rgba(26, 26, 62, 0.4);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(224, 224, 232, 0.1);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 48px rgba(196, 181, 216, 0.2);
+}
+
+/* Collection Scene */
+.collection-scene {
+    padding: 10rem 4rem;
+}
+
+.section-header {
+    margin-bottom: 5rem;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    max-width: 1400px;
+    width: 100%;
+}
+
+.collection-item {
+    opacity: 0;
+    transform: translateY(60px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.collection-item:nth-child(1) { animation-delay: 0.2s; }
+.collection-item:nth-child(2) { animation-delay: 0.4s; }
+.collection-item:nth-child(3) { animation-delay: 0.6s; }
+.collection-item:nth-child(4) { animation-delay: 0.8s; }
+
+.product-visual {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.product-shape {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    background: linear-gradient(135deg, var(--deep-plum), var(--midnight-blue));
+    box-shadow: 0 20px 60px rgba(196, 181, 216, 0.4);
+}
+
+.shape-2 {
+    background: linear-gradient(135deg, var(--midnight-blue), rgba(196, 181, 216, 0.3));
+    box-shadow: 0 20px 60px rgba(26, 26, 62, 0.6);
+    animation-delay: -2s;
+}
+
+.shape-3 {
+    background: linear-gradient(135deg, var(--soft-lavender), rgba(248, 246, 249, 0.2));
+    box-shadow: 0 20px 60px rgba(196, 181, 216, 0.5);
+    animation-delay: -4s;
+}
+
+.shape-4 {
+    background: linear-gradient(135deg, var(--chrome), rgba(224, 224, 232, 0.3));
+    box-shadow: 0 20px 60px rgba(224, 224, 232, 0.4);
+    animation-delay: -1s;
+}
+
+.shape-5 {
+    background: linear-gradient(135deg, rgba(218, 165, 32, 0.8), rgba(255, 215, 0, 0.4));
+    box-shadow: 0 20px 60px rgba(218, 165, 32, 0.5);
+    animation-delay: -3s;
+}
+
+.shape-6 {
+    background: linear-gradient(135deg, rgba(245, 222, 179, 0.9), rgba(255, 250, 205, 0.5));
+    box-shadow: 0 20px 60px rgba(245, 222, 179, 0.4);
+    animation-delay: -5s;
+}
+
+.product-info {
+    text-align: center;
+}
+
+.product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--pearl-white);
+}
+
+.product-desc {
+    font-size: 0.95rem;
+    color: var(--chrome);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    color: var(--soft-lavender);
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Experience Scene */
+.experience-scene {
+    padding: 10rem 4rem;
+    background: linear-gradient(180deg, transparent, rgba(26, 26, 62, 0.3));
+}
+
+.experience-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1400px;
+    align-items: center;
+}
+
+.experience-text {
+    padding: 2rem;
+}
+
+.experience-items {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.experience-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: var(--soft-lavender);
+}
+
+.experience-item p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--chrome);
+    font-weight: 300;
+}
+
+.experience-visual {
+    height: 500px;
+    position: relative;
+}
+
+.floating-shape {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(196, 181, 216, 0.2), transparent 70%);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: morphShape 10s ease-in-out infinite;
+    box-shadow: 0 30px 80px rgba(196, 181, 216, 0.3);
+}
+
+/* Booking Scene */
+.booking-scene {
+    padding: 10rem 4rem;
+    background: linear-gradient(180deg, rgba(26, 26, 62, 0.3), transparent);
+}
+
+.booking-content {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.booking-header {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.booking-subtitle {
+    font-size: 1.2rem;
+    color: var(--chrome);
+    margin-top: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.booking-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 4rem;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--soft-lavender);
+    font-weight: 300;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: rgba(26, 26, 62, 0.5);
+    border: 1px solid rgba(224, 224, 232, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    color: var(--pearl-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--soft-lavender);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(224, 224, 232, 0.4);
+}
+
+.submit-btn {
+    margin-top: 1rem;
+    padding: 1.2rem 3rem;
+    background: linear-gradient(135deg, var(--soft-lavender), var(--midnight-blue));
+    border: none;
+    border-radius: 50px;
+    color: var(--pearl-white);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.submit-btn:hover .btn-glow {
+    left: 100%;
+}
+
+.square-booking-embed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.booking-placeholder {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(26, 26, 62, 0.3);
+    border: 2px dashed rgba(224, 224, 232, 0.2);
+    border-radius: 12px;
+    width: 100%;
+}
+
+.placeholder-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.booking-placeholder p {
+    font-size: 1.1rem;
+    color: var(--soft-lavender);
+    margin-bottom: 0.5rem;
+}
+
+.booking-placeholder small {
+    color: var(--chrome);
+    font-size: 0.85rem;
+}
+
+/* Location Scene */
+.location-scene {
+    padding: 10rem 4rem;
+    background: linear-gradient(180deg, rgba(26, 26, 62, 0.3), transparent);
+}
+
+.location-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1400px;
+    width: 100%;
+    margin-top: 5rem;
+}
+
+.location-image-container {
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boutique-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.5s ease;
+}
+
+.location-image-container:hover .boutique-image {
+    transform: scale(1.05);
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(26, 26, 62, 0.9), transparent);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.location-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--pearl-white);
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.location-map {
+    position: relative;
+    height: 500px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.location-map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.directions-btn {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--soft-lavender), var(--midnight-blue));
+    border: none;
+    border-radius: 50px;
+    color: var(--pearl-white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 20px rgba(196, 181, 216, 0.3);
+}
+
+.directions-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(196, 181, 216, 0.5);
+}
+
+.directions-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.directions-btn:hover svg {
+    transform: translateX(5px);
+}
+
+/* Stories Scene */
+.stories-scene {
+    padding: 10rem 4rem;
+}
+
+.stories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 900px;
+    width: 100%;
+    margin-top: 5rem;
+}
+
+.story-card {
+    padding: 3rem;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideInRight 0.8s ease forwards;
+}
+
+.story-card:nth-child(1) { animation-delay: 0.2s; }
+.story-card:nth-child(2) { animation-delay: 0.4s; }
+.story-card:nth-child(3) { animation-delay: 0.6s; }
+
+.story-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--pearl-white);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.story-author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(224, 224, 232, 0.1);
+}
+
+.author-name {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--soft-lavender);
+    font-weight: 400;
+}
+
+.author-location {
+    font-size: 0.85rem;
+    color: var(--chrome);
+    font-weight: 300;
+}
+
+/* Footer */
+.main-footer {
+    background: rgba(26, 26, 62, 0.5);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(224, 224, 232, 0.1);
+    padding: 4rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto 2rem;
+}
+
+.footer-brand h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+    color: var(--soft-lavender);
+    font-size: 0.9rem;
+}
+
+.footer-contact p {
+    color: var(--chrome);
+    margin-bottom: 0.5rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-social a {
+    color: var(--chrome);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: var(--soft-lavender);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(224, 224, 232, 0.1);
+}
+
+.footer-bottom p {
+    color: var(--chrome);
+    font-size: 0.85rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+@keyframes scrollPulse {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(10px); opacity: 0.5; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes morphShape {
+    0%, 100% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        transform: rotate(0deg);
+    }
+    50% {
+        border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Parallax layers */
+.parallax-layer {
+    transition: transform 0.1s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .section-title {
+        font-size: 4rem;
+    }
+
+    .brand-title {
+        font-size: 5rem;
+        letter-spacing: 4px;
+    }
+
+    .collection-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .experience-content,
+    .booking-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .location-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .location-image-container,
+    .location-map {
+        height: 400px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .experience-visual {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        padding: 1.5rem 2rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-logo {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    .section {
+        padding: 5rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 1.5px;
+    }
+
+    .brand-title {
+        font-size: 2.8rem;
+        letter-spacing: 3px;
+    }
+
+    .brand-subtitle {
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .brand-location {
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+    }
+
+    .intro-shape {
+        width: 300px;
+        height: 300px;
+    }
+
+    .collection-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .glass-card {
+        padding: 2rem;
+    }
+
+    .product-visual {
+        height: 250px;
+    }
+
+    .product-shape {
+        width: 150px;
+        height: 150px;
+    }
+
+    .product-name {
+        font-size: 1.5rem;
+    }
+
+    .product-desc {
+        font-size: 0.9rem;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+    }
+
+    .experience-text {
+        padding: 0;
+    }
+
+    .experience-items {
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .experience-item h3 {
+        font-size: 1.6rem;
+    }
+
+    .experience-item p {
+        font-size: 0.95rem;
+    }
+
+    .experience-visual {
+        height: 300px;
+    }
+
+    .booking-container {
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .booking-header {
+        margin-bottom: 2rem;
+    }
+
+    .booking-subtitle {
+        font-size: 1rem;
+    }
+
+    .submit-btn {
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
+    }
+
+    .location-image-container,
+    .location-map {
+        height: 300px;
+    }
+
+    .location-text {
+        font-size: 1.5rem;
+    }
+
+    .image-overlay {
+        padding: 1.5rem;
+    }
+
+    .directions-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    .stories-container {
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .story-card {
+        padding: 2rem;
+    }
+
+    .story-text {
+        font-size: 1rem;
+    }
+
+    .author-name {
+        font-size: 0.85rem;
+    }
+
+    .author-location {
+        font-size: 0.8rem;
+    }
+
+    .main-footer {
+        padding: 3rem 2rem;
+    }
+
+    .footer-brand h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-logo {
+        font-size: 1rem;
+        letter-spacing: 1.5px;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+    }
+
+    .section {
+        padding: 4rem 1.25rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        letter-spacing: 0.5px;
+    }
+
+    .section-subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    .brand-title {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .brand-subtitle {
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+    }
+
+    .brand-location {
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+    }
+
+    .intro-shape {
+        width: 250px;
+        height: 250px;
+    }
+
+    .scroll-indicator {
+        bottom: 2rem;
+    }
+
+    .scroll-indicator span {
+        font-size: 0.7rem;
+    }
+
+    .scroll-line {
+        height: 30px;
+    }
+
+    .collection-scene,
+    .experience-scene,
+    .booking-scene,
+    .location-scene,
+    .stories-scene {
+        padding: 6rem 1.25rem;
+    }
+
+    .glass-card {
+        padding: 1.5rem;
+        border-radius: 15px;
+    }
+
+    .product-visual {
+        height: 200px;
+        margin-bottom: 1.5rem;
+    }
+
+    .product-shape {
+        width: 120px;
+        height: 120px;
+    }
+
+    .product-name {
+        font-size: 1.3rem;
+    }
+
+    .product-desc {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .product-price {
+        font-size: 1rem;
+    }
+
+    .experience-items {
+        gap: 1.5rem;
+    }
+
+    .experience-item h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .experience-item p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .experience-visual {
+        height: 250px;
+    }
+
+    .booking-container {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.875rem;
+        font-size: 0.95rem;
+    }
+
+    .submit-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+    }
+
+    .booking-placeholder {
+        padding: 2rem 1.5rem;
+    }
+
+    .placeholder-icon {
+        font-size: 2rem;
+    }
+
+    .booking-placeholder p {
+        font-size: 0.95rem;
+    }
+
+    .booking-placeholder small {
+        font-size: 0.75rem;
+    }
+
+    .location-image-container,
+    .location-map {
+        height: 250px;
+    }
+
+    .location-text {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .image-overlay {
+        padding: 1rem;
+    }
+
+    .directions-btn {
+        bottom: 0.75rem;
+        right: 0.75rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.75rem;
+    }
+
+    .story-card {
+        padding: 1.5rem;
+    }
+
+    .story-text {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .story-author {
+        padding-top: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .author-name {
+        font-size: 0.8rem;
+    }
+
+    .author-location {
+        font-size: 0.75rem;
+    }
+
+    .main-footer {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .footer-content {
+        gap: 2rem;
+    }
+
+    .footer-brand h3 {
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+    }
+
+    .footer-brand p {
+        font-size: 0.85rem;
+    }
+
+    .footer-contact p {
+        font-size: 0.85rem;
+    }
+
+    .footer-social a {
+        font-size: 0.85rem;
+    }
+
+    .footer-bottom p {
+        font-size: 0.75rem;
+    }
+}
+
+/* Mobile landscape optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+    .intro-scene {
+        min-height: 120vh;
+    }
+
+    .brand-title {
+        font-size: 2.5rem;
+    }
+
+    .scroll-indicator {
+        bottom: 1.5rem;
+    }
+
+    .section {
+        padding: 4rem 2rem;
+    }
+}
+
+/* Grain texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    z-index: 1000;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}

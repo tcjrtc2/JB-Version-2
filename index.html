@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAZZYS BOTIQUE - Hair Sculpture Studio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 3D Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-logo">JAZZYS BOTIQUE</div>
+        <div class="nav-links">
+            <a href="#collection">Collection</a>
+            <a href="#experience">Experience</a>
+            <a href="#booking">Book</a>
+        </div>
+    </nav>
+
+    <!-- Intro Scene -->
+    <section id="intro" class="section intro-scene">
+        <div class="intro-content">
+            <div class="logo-reveal">
+                <h1 class="brand-title">JAZZYS BOTIQUE</h1>
+                <p class="brand-subtitle">Hair as Sculpture</p>
+                <p class="brand-location">Patrick Henry Mall</p>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll to Discover</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+        <div class="intro-shape"></div>
+    </section>
+
+    <!-- The Hair Collection -->
+    <section id="collection" class="section collection-scene">
+        <div class="section-header parallax-layer" data-speed="0.5">
+            <h2 class="section-title">The Collection</h2>
+            <p class="section-subtitle">Sculptural Artistry in Motion</p>
+        </div>
+
+        <div class="collection-grid">
+            <div class="collection-item parallax-layer" data-speed="0.3">
+                <div class="glass-card">
+                    <div class="product-visual">
+                        <div class="product-shape shape-1"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Celestial Wave</h3>
+                        <p class="product-desc">Flowing lace front wig with cosmic dimension</p>
+                        <span class="product-price">$200</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collection-item parallax-layer" data-speed="0.6">
+                <div class="glass-card">
+                    <div class="product-visual">
+                        <div class="product-shape shape-2"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Midnight Silk</h3>
+                        <p class="product-desc">Hand-crafted precision with pearl undertones</p>
+                        <span class="product-price">$320</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collection-item parallax-layer" data-speed="0.4">
+                <div class="glass-card">
+                    <div class="product-visual">
+                        <div class="product-shape shape-3"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Lavender Dream</h3>
+                        <p class="product-desc">Ethereal texture with dimensional movement</p>
+                        <span class="product-price">$280</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collection-item parallax-layer" data-speed="0.5">
+                <div class="glass-card">
+                    <div class="product-visual">
+                        <div class="product-shape shape-4"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Chrome Essence</h3>
+                        <p class="product-desc">Future-forward metallic sophistication</p>
+                        <span class="product-price">$360</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collection-item parallax-layer" data-speed="0.7">
+                <div class="glass-card">
+                    <div class="product-visual">
+                        <div class="product-shape shape-5"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Golden Nourish Hair Oil</h3>
+                        <p class="product-desc">Luxurious botanical blend for radiant shine</p>
+                        <span class="product-price">$45</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collection-item parallax-layer" data-speed="0.8">
+                <div class="glass-card">
+                    <div class="product-visual">
+                        <div class="product-shape shape-6"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Pure Shea Butter</h3>
+                        <p class="product-desc">Raw organic moisture for ultimate hair care</p>
+                        <span class="product-price">$35</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Experience -->
+    <section id="experience" class="section experience-scene">
+        <div class="experience-content">
+            <div class="experience-text parallax-layer" data-speed="0.4">
+                <h2 class="section-title">The Experience</h2>
+                <div class="experience-items">
+                    <div class="experience-item">
+                        <h3>Custom Installations</h3>
+                        <p>Bespoke hair architecture tailored to your vision. Each piece is crafted as wearable art, designed in consultation with our master stylists.</p>
+                    </div>
+                    <div class="experience-item">
+                        <h3>Sculptural Wigs</h3>
+                        <p>Hand-ventilated creations that transcend traditional wigmaking. Every strand placed with intention, every movement choreographed.</p>
+                    </div>
+                    <div class="experience-item">
+                        <h3>Private Consultations</h3>
+                        <p>Visit our boutique booth located in Patrick Henry Mall for intimate styling sessions where we explore color, texture, and form. Your transformation begins with understanding.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="experience-visual parallax-layer" data-speed="0.6">
+                <div class="floating-shape"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book an Appointment -->
+    <section id="booking" class="section booking-scene">
+        <div class="booking-content">
+            <div class="booking-header parallax-layer" data-speed="0.3">
+                <h2 class="section-title">Reserve Your Experience</h2>
+                <p class="booking-subtitle">Begin Your Transformation</p>
+            </div>
+            
+            <div class="booking-container glass-card">
+                <div class="booking-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" placeholder="(555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Type</label>
+                        <select id="service">
+                            <option>Custom Installation</option>
+                            <option>Wig Consultation</option>
+                            <option>Styling Session</option>
+                            <option>Maintenance & Care</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell us about your vision</label>
+                        <textarea id="message" rows="4" placeholder="Describe your ideal transformation..."></textarea>
+                    </div>
+                    <button class="submit-btn">
+                        <span>Submit Request</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+                
+                <!-- Square Booking Widget Placeholder -->
+                <div class="square-booking-embed">
+                    <div class="booking-placeholder">
+                        <div class="placeholder-icon">📅</div>
+                        <p>Square Booking Integration</p>
+                        <small>Replace this section with your Square booking embed code</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="section location-scene">
+        <div class="section-header parallax-layer" data-speed="0.3">
+            <h2 class="section-title">Visit Us</h2>
+            <p class="section-subtitle">Located in Patrick Henry Mall</p>
+        </div>
+
+        <div class="location-content">
+            <div class="location-image-container parallax-layer glass-card" data-speed="0.4">
+                <img src="Botique picture.jpeg" alt="Jazzys Botique Interior" class="boutique-image">
+                <div class="image-overlay">
+                    <p class="location-text">Patrick Henry Mall</p>
+                </div>
+            </div>
+
+            <div class="location-map parallax-layer glass-card" data-speed="0.5">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3171.234!2d-76.4929!3d37.0868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89baa1a40c4e3c71%3A0x3f9a8f9a0c9c9c9c!2s12300%20Jefferson%20Ave%2C%20Newport%20News%2C%20VA%2023602!5e0!3m2!1sen!2sus!4v1737158400000!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0; border-radius: 12px;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <a href="https://www.google.com/maps/dir//12300+Jefferson+Ave,+Newport+News,+VA+23602" target="_blank" class="directions-btn">
+                    <span>Get Directions</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Stories -->
+    <section id="stories" class="section stories-scene">
+        <div class="section-header parallax-layer" data-speed="0.3">
+            <h2 class="section-title">Client Stories</h2>
+            <p class="section-subtitle">Transformations Told</p>
+        </div>
+
+        <div class="stories-container">
+            <div class="story-card parallax-layer glass-card" data-speed="0.4">
+                <div class="story-text">"Jazzys Botique didn't just create a wig—they sculpted confidence. Every detail feels intentional, every movement natural. It's art I wear."</p>
+                <div class="story-author">
+                    <span class="author-name">JASMINE K.</span>
+                    <span class="author-location">New York</span>
+                </div>
+            </div>
+
+            <div class="story-card parallax-layer glass-card" data-speed="0.6">
+                <p class="story-text">"I've never experienced hair as self-expression until now. The consultation felt like working with a curator, and the result is museum-worthy."</p>
+                <div class="story-author">
+                    <span class="author-name">MARCUS L.</span>
+                    <span class="author-location">Los Angeles</span>
+                </div>
+            </div>
+
+            <div class="story-card parallax-layer glass-card" data-speed="0.5">
+                <p class="story-text">"Walking out of Jazzys Botique, I felt like a completely new version of myself. The craftsmanship is unparalleled—this is haute couture for hair."</p>
+                <div class="story-author">
+                    <span class="author-name">ARIA N.</span>
+                    <span class="author-location">Miami</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>JAZZYS BOTIQUE</h3>
+                <p>Hair Sculpture Studio</p>
+            </div>
+            <div class="footer-contact">
+                <p>Located in Patrick Henry Mall</p>
+                <p>info@jazzysbotique.studio</p>
+                <p>757-781-6164</p>
+            </div>
+            <div class="footer-social">
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+                <a href="#">TikTok</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Jazzys Botique. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
