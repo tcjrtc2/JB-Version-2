@@ -88,15 +88,17 @@ class FlowingShape {
     }
 }
 
-// Initialize particles and shapes
+// Initialize particles and shapes (reduced for performance)
 const particles = [];
 const shapes = [];
 
-for (let i = 0; i < 100; i++) {
+// Reduced particle count from 100 to 50 for better performance
+for (let i = 0; i < 50; i++) {
     particles.push(new Particle());
 }
 
-for (let i = 0; i < 5; i++) {
+// Reduced shape count from 5 to 3 for better performance
+for (let i = 0; i < 3; i++) {
     shapes.push(new FlowingShape());
 }
 
@@ -120,20 +122,23 @@ function animate() {
         particle.draw();
     });
 
-    // Draw connections between close particles
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+    // Draw connections between close particles (optimized with frame skipping)
+    // Only draw connections every other frame for better performance
+    if (Math.floor(time * 100) % 2 === 0) {
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < 150) {
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.strokeStyle = `rgba(196, 181, 216, ${0.1 * (1 - distance / 150)})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
+                if (distance < 120) {  // Reduced from 150 for fewer connections
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(196, 181, 216, ${0.1 * (1 - distance / 120)})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
             }
         }
     }
@@ -143,42 +148,18 @@ function animate() {
 
 animate();
 
-// Handle window resize
+// Handle window resize with debouncing for better performance
+let resizeTimeout;
 window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-});
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }, 150);
+}, { passive: true });
 
-// Parallax Scroll Effects
+// Parallax Scroll Effects (optimized version below, this section replaced by requestAnimationFrame version)
 let scrollY = 0;
-
-window.addEventListener('scroll', () => {
-    scrollY = window.scrollY;
-    
-    // Apply parallax to all layers
-    const parallaxLayers = document.querySelectorAll('.parallax-layer');
-    
-    parallaxLayers.forEach(layer => {
-        const speed = layer.getAttribute('data-speed') || 0.5;
-        const rect = layer.getBoundingClientRect();
-        const layerTop = rect.top + scrollY;
-        const offset = (scrollY - layerTop) * speed;
-        
-        layer.style.transform = `translate3d(0, ${offset}px, 0)`;
-    });
-
-    // Intro scene rotation
-    const introShape = document.querySelector('.intro-shape');
-    if (introShape) {
-        introShape.style.transform = `translate(-50%, -50%) rotate(${scrollY * 0.1}deg) scale(${1 + scrollY * 0.0005})`;
-    }
-
-    // Floating shape morphing
-    const floatingShape = document.querySelector('.floating-shape');
-    if (floatingShape) {
-        floatingShape.style.transform = `rotate(${scrollY * 0.05}deg)`;
-    }
-});
 
 // Scroll-triggered animations for collection items
 const observerOptions = {
@@ -257,20 +238,28 @@ if (submitBtn) {
     });
 }
 
-// Add mouse movement parallax effect
+// Add mouse movement parallax effect with throttling
 let mouseX = 0;
 let mouseY = 0;
+let mouseMoveTicking = false;
 
 document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    
-    // Apply subtle mouse parallax to intro shape
-    const introShape = document.querySelector('.intro-shape');
-    if (introShape && window.scrollY < window.innerHeight) {
-        introShape.style.transform = `translate(calc(-50% + ${mouseX * 20}px), calc(-50% + ${mouseY * 20}px))`;
+    if (!mouseMoveTicking) {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        
+        window.requestAnimationFrame(() => {
+            // Apply subtle mouse parallax to intro shape
+            const introShape = document.querySelector('.intro-shape');
+            if (introShape && window.scrollY < window.innerHeight) {
+                introShape.style.transform = `translate(calc(-50% + ${mouseX * 20}px), calc(-50% + ${mouseY * 20}px))`;
+            }
+            mouseMoveTicking = false;
+        });
+        
+        mouseMoveTicking = true;
     }
-});
+}, { passive: true });
 
 // Add cursor glow effect
 const cursorGlow = document.createElement('div');
@@ -288,23 +277,34 @@ cursorGlow.style.cssText = `
 `;
 document.body.appendChild(cursorGlow);
 
+let cursorGlowTicking = false;
 document.addEventListener('mousemove', (e) => {
-    cursorGlow.style.left = e.clientX + 'px';
-    cursorGlow.style.top = e.clientY + 'px';
-    cursorGlow.style.opacity = '1';
-});
+    if (!cursorGlowTicking) {
+        window.requestAnimationFrame(() => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+            cursorGlow.style.opacity = '1';
+            cursorGlowTicking = false;
+        });
+        cursorGlowTicking = true;
+    }
+}, { passive: true });
 
 document.addEventListener('mouseleave', () => {
     cursorGlow.style.opacity = '0';
 });
 
-// Add performance optimization for parallax
+// Add performance optimization for parallax with requestAnimationFrame
 let ticking = false;
+let cachedParallaxLayers = null;
 
 function updateParallax() {
-    const parallaxLayers = document.querySelectorAll('.parallax-layer');
+    // Cache layer selection to avoid repeated querySelectorAll
+    if (!cachedParallaxLayers) {
+        cachedParallaxLayers = document.querySelectorAll('.parallax-layer');
+    }
     
-    parallaxLayers.forEach(layer => {
+    cachedParallaxLayers.forEach(layer => {
         const speed = parseFloat(layer.getAttribute('data-speed')) || 0.5;
         const rect = layer.getBoundingClientRect();
         const layerTop = rect.top + scrollY;
@@ -312,6 +312,18 @@ function updateParallax() {
         
         layer.style.transform = `translate3d(0, ${offset}px, 0)`;
     });
+    
+    // Handle intro scene rotation
+    const introShape = document.querySelector('.intro-shape');
+    if (introShape && scrollY < window.innerHeight) {
+        introShape.style.transform = `translate(-50%, -50%) rotate(${scrollY * 0.1}deg) scale(${1 + scrollY * 0.0005})`;
+    }
+
+    // Floating shape morphing
+    const floatingShape = document.querySelector('.floating-shape');
+    if (floatingShape) {
+        floatingShape.style.transform = `rotate(${scrollY * 0.05}deg)`;
+    }
     
     ticking = false;
 }
