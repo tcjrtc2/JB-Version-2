@@ -18,8 +18,8 @@
         <div class="nav-logo">JAZZYS BOUTIQUE</div>
         <div class="nav-links">
             <a href="#collection">Collection</a>
-            <a href="#experience">Experience</a>
-            <a href="#booking">Book</a>
+            <a href="#experience">About Us</a>
+            <a href="#cart">Cart</a>
         </div>
     </nav>
 
@@ -151,9 +151,52 @@
         </div>
     </section>
 
-    <!-- Book an Appointment -->
-    <section id="booking" class="section booking-scene">
-        <div class="booking-content">
+    <!-- Shopping Cart -->
+    <section id="cart" class="section cart-scene">
+        <div class="cart-content">
+            <div class="section-header">
+                <h2 class="section-title">Shopping Cart</h2>
+                <p class="section-subtitle">Review your items and checkout securely</p>
+            </div>
+            
+            <div class="cart-container">
+                <div class="cart-items" id="cartItems">
+                    <p class="empty-cart-message">Your cart is empty. Add items from our collection!</p>
+                </div>
+                
+                <div class="cart-summary glass-card">
+                    <h3>Order Summary</h3>
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax:</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                    
+                    <!-- Square Checkout Button -->
+                    <div id="square-checkout-container">
+                        <button class="checkout-btn" id="checkoutBtn" disabled>
+                            <span>Checkout with Square</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <p class="secure-checkout">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                        </svg>
+                        Secure checkout powered by Square
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
